@@ -1,10 +1,37 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
+import Navbar from './components/Navbar/';
 
 class App extends Component {
-  // constructor(props) {
+  
+  render() {
+    return (<Router>
+      <Navbar />
+      {/* render navbar here */}
+      <Switch>
+          <Route path="/">
+            <p>HELLO</p>
+            {/* <Home /> */}
+            {/* render home page component here */}
+          </Route>
+          {/* <Route path="/tickets">
+            <Tickets />
+          </Route>
+          <Route path="/events">
+            <Events />
+          </Route>
+          <Route path="/albums">
+            <Albums />
+          </Route> */}
+        </Switch>
+    </Router>)
+  }
+}
+
+export default App;
+// constructor(props) {
   //   super(props);
   //   this.state = { apiResponse: "" };
   // }
@@ -30,26 +57,3 @@ class App extends Component {
   //     </div>
   //   );
   // }
-  render() {
-    <Router>
-      {/* render navbar here */}
-      <Switch>
-          <Route path="/">
-            <Home />
-            {/* render home page component here */}
-          </Route>
-          {/* <Route path="/tickets">
-            <Tickets />
-          </Route>
-          <Route path="/events">
-            <Events />
-          </Route>
-          <Route path="/albums">
-            <Albums />
-          </Route> */}
-        </Switch>
-    </Router>
-  }
-}
-
-export default App;
