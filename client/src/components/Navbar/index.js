@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 // TODO: replace this to be a variable such 
 // that when backend returns whether it is mobile or web, 
 // render different stylesheet
-import styles from './styles.scss';
+import './styles.css';
 
 class Navbar extends Component {
     render() {
-        return (<div class="navbar">
+        return (<div className="navbar">
             <ul>
                 <li><Link to="/events">Events</Link></li>
                 <li><Link to="/albums">Albums</Link></li>

@@ -1,12 +1,20 @@
-
+* {
+    color: white;
+}
 .navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #fAA275;
+    background-color: #28293D;
     align-items: baseline;
     border-radius: 10px;
+    margin: 20px;
+}
+
+.navbar > h1 {
+    margin: 0;
+    padding: 0;
 }
 
 .navbar > ul {
