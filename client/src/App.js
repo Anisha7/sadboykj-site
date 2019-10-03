@@ -36,8 +36,9 @@ class App extends Component {
       <Switch>
           <Route path="/">
             <Home />
+            {/* render home page component here */}
           </Route>
-          <Route path="/tickets">
+          {/* <Route path="/tickets">
             <Tickets />
           </Route>
           <Route path="/events">
@@ -45,7 +46,7 @@ class App extends Component {
           </Route>
           <Route path="/albums">
             <Albums />
-          </Route>
+          </Route> */}
         </Switch>
     </Router>
   }
