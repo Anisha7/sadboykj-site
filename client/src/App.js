@@ -1,32 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
-import Navbar from './components/Navbar/';
+import Home from './components/Home/';
 
 class App extends Component {
   
   render() {
-    return (<Router>
-      <Navbar />
-      {/* render navbar here */}
-      <Switch>
-          <Route path="/">
-            <p>HELLO</p>
-            {/* <Home /> */}
-            {/* render home page component here */}
-          </Route>
-          {/* <Route path="/tickets">
-            <Tickets />
-          </Route>
-          <Route path="/events">
-            <Events />
-          </Route>
-          <Route path="/albums">
-            <Albums />
-          </Route> */}
-        </Switch>
-    </Router>)
+    return (
+      <div className="wrapper">
+      <Router>
+        {/* render navbar here */}
+        <Switch>
+            <Route path="/">
+              {/* <p>HELLO</p> */}
+              <Home />
+              {/* render home page component here */}
+            </Route>
+            {/* <Route path="/tickets">
+              <Tickets />
+            </Route>
+            <Route path="/events">
+              <Events />
+            </Route>
+            <Route path="/albums">
+              <Albums />
+            </Route> */}
+          </Switch>
+      </Router>
+      </div>
+    )
   }
 }
 

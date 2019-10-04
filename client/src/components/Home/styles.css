@@ -1,0 +1,44 @@
+* {
+    background-color: #242121;
+}
+
+#root {
+    height: 100%;
+}
+
+.container {
+    display: block;
+    position:absolute;
+    height:auto;
+    bottom:0;
+    top:0;
+    left:0;
+    right:0;
+    margin: 5%;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+.logo {
+    width: 225px;
+    margin-bottom: 5%;
+}
+
+.cover {
+    width: 465px;
+}
+
+@media only screen and (max-width: 900px) {
+    .logo {
+        width: 150px;
+    }
+
+    .cover {
+        width: 300px;
+    }
+  }
