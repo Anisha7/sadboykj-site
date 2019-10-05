@@ -4,6 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors"); // prevent cors errors
+const bodyParser = require('body-parser');
+// const jwt = require('_helpers/jwt');
+
+// use JWT auth to secure the api
+// app.use(jwt());
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -15,6 +20,8 @@ var testAPIRouter = require("./routes/testAPI");
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors()); // use cors module
 app.use(logger('dev'));
 app.use(express.json());
