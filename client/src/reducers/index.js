@@ -4,8 +4,8 @@ import { TICKET_SUBMISSION_SUCCESS } from '../actions'
 const ticketSubmissionReducer = (state = [], action) => {
     switch(action.type) {
       case TICKET_SUBMISSION_SUCCESS:
-        const { success } = action.payload
-        return [...state, { success }]
+        const success = action.payload
+        return success
   
       default:
         return state

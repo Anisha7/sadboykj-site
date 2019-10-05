@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import './styles.css';
 import '../../commonStyles.css'
@@ -18,6 +19,11 @@ class Error extends Component {
         if (this.state.getTickets) {
             return <Redirect to="/tickets" />
         }
+        
+        if ( this.props.ticketSubmissionSuccess ) {
+            return <Redirect to="/confirmation" />
+        }
+
         return (
         <HomeWrapper>
             <FontAwesomeIcon icon={faSadTear} size="4x" />
@@ -28,4 +34,10 @@ class Error extends Component {
     }
 }
 
-export default Error;
+const mapStateToProps = (state) => {
+    return {
+        ticketSubmissionSuccess: state.ticketSubmissionSuccess
+    }
+  }
+  
+export default connect(mapStateToProps)(Error);

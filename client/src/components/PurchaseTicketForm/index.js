@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { updateTicketSubmissionSuccess } from './actions';
 import HomeWrapper from '../HomeWrapper/'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -44,15 +46,24 @@ class PurchaseTicketForm extends Component {
             email: this.state.email,
             age: this.state.age
         }
-
+        let success = false
         fetch("http://localhost:9000/tickets", {
             method: 'post',
             body: JSON.stringify(opts)
-        }).then(function(response) {
-            return response.json();
-        }).then(function(data) {
-            console.log('Created Gist:', data);
-        })
+        }).then((response) => response.json())
+          .then((data) => {
+              console.log('Created Gist:', data)
+              success = true
+            })
+          .catch((err) => {
+              // TODO: Test if this catches errors sent from the backend
+              // In case adding to database failed or something
+              // went wrong server side. Otherwise, check for that 
+              // case to update ticketSubmissionSuccess
+              console.log(err.text())
+              success = false
+          })
+        this.props.updateTicketSubmissionSuccess(success)
     }
 
     render() {
@@ -119,4 +130,16 @@ class PurchaseTicketForm extends Component {
     }
 }
 
-export default PurchaseTicketForm;
+const mapStateToProps = (state) => {
+    return {
+  
+    }
+  }
+  
+  const mapDispatchToProps = () => {
+    return {
+        updateTicketSubmissionSuccess
+    }
+  }
+
+  export default connect(mapStateToProps, mapDispatchToProps())(PurchaseTicketForm);

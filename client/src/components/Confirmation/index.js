@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
-import '../../commonStyles.css'
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import '../../commonStyles.css';
 import './styles.css';
-import { faCheckSquare } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import HomeWrapper from '../HomeWrapper/'
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HomeWrapper from '../HomeWrapper/';
 
 class TicketConfirmation extends Component {
 
     render() {
+        if ( !this.props.ticketSubmissionSuccess ) {
+            return <Redirect to="/error" />
+        }
+        
         return (
         <HomeWrapper>
             <FontAwesomeIcon icon={faCheckSquare} size="4x" />
@@ -30,4 +35,11 @@ class TicketConfirmation extends Component {
     }
 }
 
-export default TicketConfirmation;
+
+const mapStateToProps = (state) => {
+    return {
+        ticketSubmissionSuccess: state.ticketSubmissionSuccess
+    }
+  }
+  
+export default connect(mapStateToProps)(TicketConfirmation);
