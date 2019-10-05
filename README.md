@@ -1,16 +1,11 @@
 # sadboykj-site
  
 <!-- TODO: write a script that runs the backend when front end is run! -->
-<!-- TODO: add redux to store backend response for form submission success to prevent going to a URL -->
+<!-- TODO: test that api fetch works properly -->
 ## How to run the app:
     1. Clone the repository.
     2. Open your terminal
     3. `cd api`
-    4. `npm install`
-    5. `nodemon server.js`
-    6. Open a new terminal or new tab in your terminal
-    7. `cd client`
-    8. `npm install`
-    9. `npm start`
+    4. `npm run dev`
 
-    This should run the website!
+    This should run the server and client at the same time!
