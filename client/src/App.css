@@ -22,3 +22,11 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+html, body, .App, .App-header, .App-intro>div {
+  height: 100%
+}
+
+.wrapper {
+  height: 100%;
+}
