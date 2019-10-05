@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateTicketSubmissionSuccess } from './actions';
+import { updateTicketSubmissionSuccess } from '../../actions';
 import HomeWrapper from '../HomeWrapper/'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
