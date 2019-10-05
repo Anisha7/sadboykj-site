@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 // app.use(jwt());
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var usersRouter = require('./routes/users');
 
 var app = express();
 var testAPIRouter = require("./routes/testAPI");
