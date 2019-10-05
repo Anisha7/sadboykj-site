@@ -12,6 +12,7 @@ class PurchaseTicketForm extends Component {
         super(props)
         this.state={
             goHome: false,
+            goToConfirmation: false,
             firstName: '',
             lastName: '',
             email: '',
@@ -34,9 +35,32 @@ class PurchaseTicketForm extends Component {
         return result
     }
 
+    // TODO: Test this function
+    sendData() {
+        const opts = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            age: this.state.age
+        }
+
+        fetch("http://localhost:9000/tickets", {
+            method: 'post',
+            body: JSON.stringify(opts)
+        }).then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            console.log('Created Gist:', data);
+        })
+    }
+
     render() {
         if (this.state.goHome) {
             return <Redirect to="/" />
+        }
+
+        if (this.state.goToConfirmation) {
+            return <Redirect to="/confirmation" />
         }
 
         let error = <p></p>
@@ -79,7 +103,13 @@ class PurchaseTicketForm extends Component {
                             onChange={(e) => this.setState({ age : e.target.value})}
                             required />
                     <div>
-                        <button className="submitButton" onClick={() => this.validateData()}> GET FREE TICKET </button>
+                        <button className="submitButton" onClick={() => {
+                            const valid = this.validateData()
+                            if ( valid ) {
+                                this.sendData();
+                                this.setState({ goToConfirmation : true });
+                            }
+                        }}> RESERVE TICKET </button>
                         {error}
                     </div>
                 </div>
