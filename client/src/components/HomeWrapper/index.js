@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../commonStyles.css'
 import './styles.css';
 import '../../modules/font-awesome-4.7.0/css/font-awesome.min.css'
 import { faInstagram, faSoundcloud, faApple, faSpotify } from '@fortawesome/free-brands-svg-icons'

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
 import Home from './components/Home/';
-import PurchaseTicketForm from './components/PurchaseTicketForm';
+import PurchaseTicketForm from './components/PurchaseTicketForm/';
 import Confirmation from './components/Confirmation/';
+import Error from './components/Error/';
 
 class App extends Component {
   
@@ -19,10 +20,12 @@ class App extends Component {
               <PurchaseTicketForm />
             </Route>
             {/* Only be able to go here if form is submitted, 
-            else go to error page with message "Oops, looks like your request 
-            didn't go through. Try again!" */}
+            else go to error page */}
             <Route path="/confirmation">
               <Confirmation />
+            </Route>
+            <Route path="/error">
+              <Error />
             </Route>
           </Switch>
       </Router>

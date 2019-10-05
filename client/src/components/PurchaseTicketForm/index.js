@@ -5,6 +5,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {validateFirstName, validateLastName, validateAge, validateEmail} from '../../helpers/InputValidation/'
 import './styles.css'
+import '../../commonStyles.css'
 
 
 class PurchaseTicketForm extends Component {
@@ -103,7 +104,7 @@ class PurchaseTicketForm extends Component {
                             onChange={(e) => this.setState({ age : e.target.value})}
                             required />
                     <div>
-                        <button className="submitButton" onClick={() => {
+                        <button onClick={() => {
                             const valid = this.validateData()
                             if ( valid ) {
                                 this.sendData();

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
+import '../../commonStyles.css'
 import './styles.css';
 import cover from '../../assets/cover.png';
 // import cover from '../../assets/testcover3.png'; // this has the event name
