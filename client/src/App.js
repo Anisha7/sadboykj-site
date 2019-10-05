@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
 import Home from './components/Home/';
 import PurchaseTicketForm from './components/PurchaseTicketForm';
+import Confirmation from './components/Confirmation/';
 
 class App extends Component {
   
@@ -16,6 +17,12 @@ class App extends Component {
             </Route>
             <Route path="/tickets">
               <PurchaseTicketForm />
+            </Route>
+            {/* Only be able to go here if form is submitted, 
+            else go to error page with message "Oops, looks like your request 
+            didn't go through. Try again!" */}
+            <Route path="/confirmation">
+              <Confirmation />
             </Route>
           </Switch>
       </Router>

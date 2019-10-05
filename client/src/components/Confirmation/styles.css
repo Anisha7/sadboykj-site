@@ -1,0 +1,12 @@
+
+.reservationDetails {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    font-family: Helvetica, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+    }
+}
