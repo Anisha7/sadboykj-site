@@ -1,21 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
-// Mandrill Email Service
-var nodemailer = require("nodemailer");
-var mandrillTransport = require('nodemailer-mandrill-transport');
-
 const MAILCHIMP_INT = process.env.MAILCHIMP_INT
 const MAILCHIMP_KEY = process.env.MAILCHIMP_KEY
 const MANDRILL_KEY = process.env.MANDRILL_KEY
 const LIST_ID = process.env.LIST_ID
+
+// Mandrill Email Service
+const mandrill = require('mandrill-api/mandrill');
+const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 
 // var host = "smtp.mandrillapp.com"
 
 // Signup Route
 router.post('/tickets', (req, res) => {
   const { firstName, lastName, email, age } = req.body;
-  // Construct req data
+  
+  // MAILCHIMP
   const data = {
     members: [
       {
@@ -55,26 +56,29 @@ router.post('/tickets', (req, res) => {
     }
   });
 
-  var smtpTransport = nodemailer.createTransport(mandrillTransport({
-    auth: {
-      apiKey : MANDRILL_KEY
+  // MANDRILL
+  var mailOptions = {
+    "template_name": "sadboy_halloween",
+    "template_content": [
+        {
+          "FNAME": firstName,
+        }
+    ],
+    "message": {
+      "from_email":"mgmt@sadboykj.com",
+      "from_name":"SAD BOY KJ",
+      "to":[{"email":email, "name":firstName, "type":"to"}],
+      "subject": "Sad Boy Halloween Confirmation",
     }
-  }));
-  
-  let mailOptions = {
-    from : 'mgmt@sadboykj.com',
-    to : email,
-    subject : "Sad Boy Showout Reservation",
-    html : "Hello"
   };
-  
-  // Sending email.
-  smtpTransport.sendMail(mailOptions, function(error, response){
-    if(error) {
-      throw new Error("Error in sending email");
-    }
-    console.log("Message sent: " + JSON.stringify(response));
-  });
+
+  function sendEmail() {
+    mandrill_client.messages.sendTemplate(mailOptions, function(res) {
+      console.log(res);
+    }, function(err) {
+      console.log('A mandrill error occurred: ' + err.name + ' - ' + err.message);
+    });
+  }
 });
 
 module.exports = router;

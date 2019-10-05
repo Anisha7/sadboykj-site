@@ -1,3 +1,63 @@
-.icon:hover {
+.backIcon {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+}
+
+.backIcon:hover {
     cursor: pointer;
 }
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eventName {
+    margin-bottom: 20px;
+}
+
+.eventName h1 {
+    margin: 0;
+}
+
+input {
+    width: 300px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 13px;
+    border: 1px solid #454545;
+    font-size: 16px;
+}
+
+.invalidInput {
+    border: 2px solid red;
+}
+
+.error {
+    color: red;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .eventName h1 {
+        margin: 0;
+        font-size: 22px;
+    }
+    
+    .eventName h2 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    input {
+        width: 250px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .submitButton {
+        padding: 10px 30px;
+    }
+  }
