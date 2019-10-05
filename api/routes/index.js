@@ -5,9 +5,13 @@ var router = express.Router();
 var nodemailer = require("nodemailer");
 var mandrillTransport = require('nodemailer-mandrill-transport');
 
-// router.get('/', function(req, res, next) {
-//     res.render('index', { title: 'Express' });
-// });
+
+
+var smtpTransport = nodemailer.createTransport(mandrillTransport({
+  auth: {
+    apiKey : '<< put your mandrill api key here >>'
+  }
+}));
 
 // Signup Route
 router.post('/tickets', (req, res) => {
