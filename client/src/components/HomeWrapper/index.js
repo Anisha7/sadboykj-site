@@ -4,15 +4,11 @@ import '../../modules/font-awesome-4.7.0/css/font-awesome.min.css'
 import { faInstagram, faSoundcloud, faApple, faSpotify } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import logo from '../../assets/logo.png';
-
 class Home extends Component {
     render() {
         return (
         <div className="container flex" onMouseEnter={this.handleOnMouseOut}>
-            {/* <img src={logo} className="logo" alt="logo" /> */}
             <div><p></p></div>
-            {/* add an on  */}
             <div className="flex">
                 {this.props.children}
             </div>

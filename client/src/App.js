@@ -11,10 +11,10 @@ class App extends Component {
       <div className="wrapper">
       <Router>
         <Switch>
-            <Route exact path="/" component={Home}>
+            <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/tickets" component={PurchaseTicketForm}>
+            <Route path="/tickets">
               <PurchaseTicketForm />
             </Route>
           </Switch>
