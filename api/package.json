@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "(npm run start) & (cd client && npm run start)"
+    "start": "(npm run node ./bin/www) & (cd client && npm run start)"
   },
   "proxy": "http://localhost:9000",
   "dependencies": {

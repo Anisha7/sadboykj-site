@@ -6,6 +6,6 @@
     1. Clone the repository.
     2. Open your terminal
     3. `cd api`
-    4. `npm run dev`
+    4. `npm start`
 
     This should run the server and client at the same time!
