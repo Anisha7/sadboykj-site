@@ -3,47 +3,9 @@ import { Redirect } from 'react-router-dom'
 import HomeWrapper from '../HomeWrapper/'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {validateFirstName, validateLastName, validateAge, validateEmail} from '../../helpers/InputValidation/'
 import './styles.css'
 
-// helpers for data validation
-function validateFirstName(val, ref) {
-    if (val.length === 0){
-        ref.className = 'invalidInput'
-        return false
-    }
-    ref.className = ''
-    return true
-}
-
-function validateLastName(val, ref) {
-    if (val.length === 0){
-        ref.className = 'invalidInput'
-        return false
-    }
-    ref.className = ''
-    return true
-}
-
-function validateEmail(val, ref) {
-    // eslint-disable-next-line
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const valid = re.test(String(val).toLowerCase());
-    if (!valid) {
-        ref.className = 'invalidInput'
-        return valid
-    }
-    ref.className = ''
-    return valid
-}
-
-function validateAge(val, ref) {
-    if (val < 1 || val > 90) {
-        ref.className = 'invalidInput'
-        return false
-    }
-    ref.className = ''
-    return true
-}
 
 class PurchaseTicketForm extends Component {
     constructor(props) {

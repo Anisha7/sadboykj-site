@@ -46,6 +46,7 @@ input {
     font-size: 16px;
     font-family: Helvetica, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #242121;
+    background: transparent;
 }
 
 .error {
@@ -57,3 +58,26 @@ input {
     border: 3px solid #B4B4B4;
     color: #B4B4B4;
 } */
+
+@media only screen and (max-width: 600px) {
+
+    .eventName h1 {
+        margin: 0;
+        font-size: 22px;
+    }
+    
+    .eventName h2 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    input {
+        width: 250px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .submitButton {
+        padding: 10px 30px;
+    }
+  }
