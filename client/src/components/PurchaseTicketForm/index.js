@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import HomeWrapper from '../HomeWrapper/'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import './styles.css'
 
 class PurchaseTicketForm extends Component {
     constructor(props) {
@@ -21,6 +22,9 @@ class PurchaseTicketForm extends Component {
             return <Redirect to="/" />
         }
 
+        // name
+        // email
+        // age (send int to backend)
         return (
             <HomeWrapper>
                 <FontAwesomeIcon onClick={()=>this.goHome()} className="icon" icon={faArrowLeft} size="2x" />

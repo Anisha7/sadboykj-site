@@ -1,5 +1,5 @@
 * {
-    background-color: #242121;
+    background-color: rgb(239, 239, 239);
 }
 
 #root {
@@ -29,7 +29,7 @@
 }
 
 .icon {
-    color: white;
+    color: #242121;
     margin: 20px;
 }
 

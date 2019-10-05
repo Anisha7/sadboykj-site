@@ -1,6 +1,10 @@
 
 .cover {
-    width: 465px;
+    width: 400px;
+}
+
+.cover:hover {
+    cursor: pointer;
 }
 
 .ticketButton {
@@ -8,7 +12,7 @@
     padding: 15px 30px;
     border-radius: 13px;
     border: 3px solid #5A2222;
-    font-size: 24px;
+    font-size: 16px;
     font-family: Helvetica, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #5A2222;
 }

@@ -20,8 +20,8 @@ class Home extends Component {
         }
         return (
         <HomeWrapper>
-            <img src={cover} className="cover" alt="cover" />
-            <button onClick={() => this.setState({ redirectToTicketForm : true })} className="ticketButton">GET TICKETS</button>
+            <img src={cover} className="cover" alt="cover" onClick={() => this.setState({ redirectToTicketForm : true })} />
+            {/* <button onClick={() => this.setState({ redirectToTicketForm : true })} className="ticketButton">GET TICKETS</button> */}
         </HomeWrapper>)
     }
 }

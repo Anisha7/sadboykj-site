@@ -10,7 +10,8 @@ class Home extends Component {
     render() {
         return (
         <div className="container flex" onMouseEnter={this.handleOnMouseOut}>
-            <img src={logo} className="logo" alt="logo" />
+            {/* <img src={logo} className="logo" alt="logo" /> */}
+            <div><p></p></div>
             {/* add an on  */}
             <div className="flex">
                 {this.props.children}
