@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
 import Home from './components/Home/';
+import PurchaseTicketForm from './components/PurchaseTicketForm';
 
 class App extends Component {
   
@@ -9,22 +10,13 @@ class App extends Component {
     return (
       <div className="wrapper">
       <Router>
-        {/* render navbar here */}
         <Switch>
-            <Route path="/">
-              {/* <p>HELLO</p> */}
+            <Route exact path="/" handler={Home}>
               <Home />
-              {/* render home page component here */}
             </Route>
-            {/* <Route path="/tickets">
-              <Tickets />
+            <Route path="/tickets" handler={PurchaseTicketForm}>
+              <PurchaseTicketForm />
             </Route>
-            <Route path="/events">
-              <Events />
-            </Route>
-            <Route path="/albums">
-              <Albums />
-            </Route> */}
           </Switch>
       </Router>
       </div>
