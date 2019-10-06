@@ -46,6 +46,11 @@ class PurchaseTicketForm extends Component {
             email: this.state.email,
             age: this.state.age
         }
+        fetch(
+            "http://localhost:9000/"
+        ).then((response) => {
+            console.log("MADE IT: ", response)
+        })
         let success = false
         fetch("http://localhost:9000/tickets", {
             method: 'post',
@@ -60,7 +65,7 @@ class PurchaseTicketForm extends Component {
               // In case adding to database failed or something
               // went wrong server side. Otherwise, check for that 
               // case to update ticketSubmissionSuccess
-              console.log(err.text())
+              console.log('Error: ', err.text())
               success = false
           })
         this.props.updateTicketSubmissionSuccess(success)
@@ -75,11 +80,10 @@ class PurchaseTicketForm extends Component {
             return <Redirect to="/confirmation" />
         }
 
-        let error = <p></p>
+        let error = null
         if (this.state.error) {
             error = <p class="error">Please fix the highlighted input fields!</p>
         }
-        console.log(error)
         
         return (
             <HomeWrapper>
