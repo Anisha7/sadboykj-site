@@ -13,9 +13,16 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 // var host = "smtp.mandrillapp.com"
 
 // Signup Route
+// TODO: 
+// 1. Get information from front end
+// 2. Save the information
+// 3. Send status worked or didn't work to front end
+// 4. Call a function (let it go off on its own)
 router.post('/tickets', (req, res) => {
   const { firstName, lastName, email, age } = req.body;
-  
+  console.log("I MADE IT HERE")
+
+  return res.json({ status: true })
   // MAILCHIMP
   const data = {
     members: [
@@ -79,6 +86,7 @@ router.post('/tickets', (req, res) => {
       console.log('A mandrill error occurred: ' + err.name + ' - ' + err.message);
     });
   }
+
 });
 
 module.exports = router;

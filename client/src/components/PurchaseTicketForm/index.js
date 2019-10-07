@@ -46,19 +46,18 @@ class PurchaseTicketForm extends Component {
             email: this.state.email,
             age: this.state.age
         }
-        fetch(
-            "http://localhost:9000/"
-        ).then((response) => {
-            console.log("MADE IT: ", response)
-        })
-        let success = false
+        // fetch(
+        //     "http://localhost:9000/"
+        // ).then((response) => {
+        //     console.log("MADE IT: ", response)
+        // })
         fetch("http://localhost:9000/tickets", {
             method: 'post',
             body: JSON.stringify(opts)
         }).then((response) => response.json())
           .then((data) => {
               console.log('Created Gist:', data)
-              success = true
+              this.props.updateTicketSubmissionSuccess(data.status)
             })
           .catch((err) => {
               // TODO: Test if this catches errors sent from the backend
@@ -66,9 +65,9 @@ class PurchaseTicketForm extends Component {
               // went wrong server side. Otherwise, check for that 
               // case to update ticketSubmissionSuccess
               console.log('Error: ', err.text())
-              success = false
+              this.props.updateTicketSubmissionSuccess(false)
           })
-        this.props.updateTicketSubmissionSuccess(success)
+        
     }
 
     render() {
