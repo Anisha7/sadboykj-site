@@ -46,24 +46,17 @@ class PurchaseTicketForm extends Component {
             email: this.state.email,
             age: this.state.age
         }
-        let success = false
         fetch("http://localhost:9000/tickets", {
             method: 'post',
             body: JSON.stringify(opts)
         }).then((response) => response.json())
           .then((data) => {
-              console.log('Created Gist:', data)
-              success = true
+              this.props.updateTicketSubmissionSuccess(data.status)
             })
           .catch((err) => {
-              // TODO: Test if this catches errors sent from the backend
-              // In case adding to database failed or something
-              // went wrong server side. Otherwise, check for that 
-              // case to update ticketSubmissionSuccess
-              console.log(err.text())
-              success = false
+              this.props.updateTicketSubmissionSuccess(false)
           })
-        this.props.updateTicketSubmissionSuccess(success)
+        
     }
 
     render() {
@@ -75,11 +68,10 @@ class PurchaseTicketForm extends Component {
             return <Redirect to="/confirmation" />
         }
 
-        let error = <p></p>
+        let error = null
         if (this.state.error) {
             error = <p class="error">Please fix the highlighted input fields!</p>
         }
-        console.log(error)
         
         return (
             <HomeWrapper>
@@ -134,12 +126,12 @@ const mapStateToProps = (state) => {
     return {
   
     }
-  }
+}
   
-  const mapDispatchToProps = () => {
+const mapDispatchToProps = () => {
     return {
         updateTicketSubmissionSuccess
     }
-  }
+}
 
-  export default connect(mapStateToProps, mapDispatchToProps())(PurchaseTicketForm);
+export default connect(mapStateToProps, mapDispatchToProps())(PurchaseTicketForm);
