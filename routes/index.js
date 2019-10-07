@@ -22,7 +22,8 @@ router.post('/tickets', (req, res) => {
   const { firstName, lastName, email, age } = req.body;
   console.log("I MADE IT HERE")
 
-  return res.json({ status: true })
+  res.json({ status: true })
+  return // remove this for below code to run
   // MAILCHIMP
   const data = {
     members: [
