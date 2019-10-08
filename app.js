@@ -38,6 +38,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// app.get('/', function (req, res, next) {
+//   // we could use this route as a place for documentation???
+//   res.json('Welcome to the sad boy kj api')
+// });
+
 console.log("SERVER RUNNING")
 
 module.exports = app;

@@ -46,6 +46,7 @@ class PurchaseTicketForm extends Component {
             email: this.state.email,
             age: this.state.age
         }
+        console.log(opts)
         fetch("http://localhost:9000/tickets", {
             method: 'post',
             body: JSON.stringify(opts)

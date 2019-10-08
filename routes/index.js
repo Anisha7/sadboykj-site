@@ -18,11 +18,15 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 // 2. Save the information
 // 3. Send status worked or didn't work to front end
 // 4. Call a function (let it go off on its own)
+
 router.post('/tickets', (req, res) => {
-  const { firstName, lastName, email, age } = req.body;
+  // const { firstName, lastName, email, age } = req.body;
   console.log("I MADE IT HERE")
+  console.log(req.body)
 
   res.json({ status: true })
+  res.writeContinue("Backend Workin")
+  console.log(firstName)
   return // remove this for below code to run
   // MAILCHIMP
   const data = {
