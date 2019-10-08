@@ -20,9 +20,14 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 // 4. Call a function (let it go off on its own)
 
 router.post('/tickets', (req, res) => {
+<<<<<<< HEAD
   // const { firstName, lastName, email, age } = req.body;
   console.log("I MADE IT HERE")
   console.log(req.body)
+=======
+  // console.log(req.body)
+  const { firstName, lastName, email, age } = req.body;
+>>>>>>> 1bc2b1bf63a84f7ad70dfbc148b50d9f90b761e4
 
   res.json({ status: true })
   res.writeContinue("Backend Workin")

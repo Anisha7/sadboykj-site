@@ -49,6 +49,7 @@ class PurchaseTicketForm extends Component {
         console.log(opts)
         fetch("http://localhost:9000/tickets", {
             method: 'post',
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(opts)
         }).then((response) => response.json())
           .then((data) => {
