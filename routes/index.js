@@ -21,8 +21,6 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 router.post('/tickets', (req, res) => {
   // console.log(req.body)
   const { firstName, lastName, email, age } = req.body;
-  console.log(firstName, lastName, email, age)
-  console.log("I MADE IT HERE")
 
   res.json({ status: true })
   return // remove this for below code to run
