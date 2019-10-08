@@ -19,7 +19,9 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 // 3. Send status worked or didn't work to front end
 // 4. Call a function (let it go off on its own)
 router.post('/tickets', (req, res) => {
+  // console.log(req.body)
   const { firstName, lastName, email, age } = req.body;
+  console.log(firstName, lastName, email, age)
   console.log("I MADE IT HERE")
 
   res.json({ status: true })
