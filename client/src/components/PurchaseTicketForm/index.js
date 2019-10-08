@@ -5,7 +5,7 @@ import { updateTicketSubmissionSuccess } from '../../actions';
 import HomeWrapper from '../HomeWrapper'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {validateFirstName, validateLastName, validateAge, validateEmail} from '../../helpers/InputValidation'
+import { validateFirstName, validateLastName, validateAge, validateEmail } from '../../helpers/InputValidation'
 import './styles.css'
 import '../../commonStyles.css'
 
@@ -46,6 +46,9 @@ class PurchaseTicketForm extends Component {
             email: this.state.email,
             age: this.state.age
         }
+
+        console.log(opts.age)
+
         fetch("http://localhost:9000/tickets", {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -71,7 +74,7 @@ class PurchaseTicketForm extends Component {
 
         let error = null
         if (this.state.error) {
-            error = <p class="error">Please fix the highlighted input fields!</p>
+            error = <p className="error">Please fix the highlighted input fields!</p>
         }
         
         return (
@@ -105,7 +108,7 @@ class PurchaseTicketForm extends Component {
                             name="age" 
                             placeholder="Age" 
                             type="number" value={this.state.age} 
-                            onChange={(e) => this.setState({ age : e.target.value})}
+                            onChange={(e) => this.setState({ age : parseInt(e.target.value.toString(), 10)})}
                             required />
                     <div>
                         <button onClick={() => {

@@ -8,3 +8,7 @@
     4. Run command: `npm start`
 
     This should run the server and client at the same time!
+
+# Security
+1. I created the forms using an input and a custom button that is not affiliated with the form. This prevents SQL injection since we are not accessing or using the URL data in any way.
+2. I am checking for malicious input upon the form submit before accepting the value, such that the form would not submit if the value is malicious using regular expressions. 
