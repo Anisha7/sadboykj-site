@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "(node ./bin/www) & (cd client && npm run start)"
+    "start": "(source .bash_profile) & (node ./bin/www) & (cd client && npm run start)"
   },
   "proxy": "http://localhost:9000",
   "dependencies": {
@@ -14,6 +14,7 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "mailchimp-api-v3": "^1.13.1",
     "mandrill-api": "^1.0.45",
     "morgan": "~1.9.1"
   }

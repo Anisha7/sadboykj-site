@@ -6,7 +6,9 @@ const MAILCHIMP_KEY = process.env.MAILCHIMP_KEY
 const MANDRILL_KEY = process.env.MANDRILL_KEY
 const LIST_ID = process.env.LIST_ID
 
-// Mandrill Email Service
+// Email Services
+const Mailchimp = require('mailchimp-api-v3');
+const mailchimp = MAILCHIMP_KEY ? new Mailchimp(MAILCHIMP_KEY) : {};
 const mandrill = require('mandrill-api/mandrill');
 const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 
@@ -20,19 +22,9 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 // 4. Call a function (let it go off on its own)
 
 router.post('/tickets', (req, res) => {
-<<<<<<< HEAD
-  // const { firstName, lastName, email, age } = req.body;
-  console.log("I MADE IT HERE")
-  console.log(req.body)
-=======
-  // console.log(req.body)
   const { firstName, lastName, email, age } = req.body;
->>>>>>> 1bc2b1bf63a84f7ad70dfbc148b50d9f90b761e4
-
-  res.json({ status: true })
-  res.writeContinue("Backend Workin")
-  console.log(firstName)
-  return // remove this for below code to run
+  res.json({ status: true });
+  
   // MAILCHIMP
   const data = {
     members: [
@@ -48,30 +40,60 @@ router.post('/tickets', (req, res) => {
     ]
   };
 
+  console.log("Data put into Mailchimp format")
   const postData = JSON.stringify(data);
+
   const url = MAILCHIMP_INT + '.api.mailchimp.com/3.0/lists/' + LIST_ID
+  // return mailchimp.post(`lists/${LIST_ID}`, {
+  //   update_existing: update !== undefined ? update : true,
+  //   members: [
+  //     {
+  //       email_address: email,
+  //       status: 'subscribed',
+  //       merge_fields: {
+  //         FNAME: firstName,
+  //         LNAME: lastName,
+  //         AGE: age
+  //       }
+  //     }
+  //   ],
+  // }).then(m => {
+  //   if (m.errors) {
+  //     console.log('Error adding new subscriber to MC', m.errors);
+  //   }
+  //   return m;
+  // }).catch(err => {
+  //   console.warn('Failed adding subscriber', email, err);
+  // });
 
   const options = {
     url: url,
     method: 'POST',
     headers: {
-      Authorization: MAILCHIMP_KEY,
-      'Content-Type': 'application/json'
+      Authorization: MAILCHIMP_KEY
+      // 'Content-Type': 'application/json'
     },
     body: postData
   };
 
+  console.log("Mail Chimp Options")
+  console.log(options)
+
   request(options, (err, response, body) => {
+    console.log("We made it!")
     if (err) {
-      res.redirect('/error')
+      console.log("Could not connect to MailChimp")
+      // res.redirect('/error')
     } else {
       if (response.statusCode === 200) {
         // res.redirect('/confirmation');
         console.log("email retrieved")
-        res.send(firstName)
+        // res.json(response)
       }
     }
   });
+
+  return
 
   // MANDRILL
   var mailOptions = {
