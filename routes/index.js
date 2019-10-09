@@ -28,58 +28,70 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 router.post('/tickets', (req, res) => {
   const { firstName, lastName, email, age } = req.body;
   // var worker = new Worker('mailchimp.js');
+
   const data = {
-    members: [
-    {
-      email_address: email,
-      status: 'subscribed',
-      merge_fields: {
-        FNAME: firstName,
-        LNAME: lastName,
-        AGE: age
-      }
+    email_address: email,
+    status: 'subscribed',
+    merge_fields: {
+      FNAME: firstName,
+      LNAME: lastName,
+      AGE: age
     }
-    ]
   };
 
   console.log("Data put into Mailchimp format")
   const postData = JSON.stringify(data);
-  const url = MAILCHIMP_INT + '.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members'
+  // // const url = MAILCHIMP_INT + '.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members'
 
-  const options = {
-      host: MAILCHIMP_INT + '.api.mailchimp.com',
-      path: '/3.0/lists/' + LIST_ID + '/members', 
-      // "X-HTTP-Method-Override": PUT,
-      method: 'POST',
-      headers: {
-        'Authorization': 'apikey ' + MAILCHIMP_KEY,
-        'Content-Type': 'application/json'
-      },
-      body: postData
-  };
+  // const options = {
+  //     host: 'https://' + MAILCHIMP_INT + '.api.mailchimp.com',
+  //     path: '/3.0/lists/' + LIST_ID + '/members', 
+  //     // "X-HTTP-Method-Override": PUT,
+  //     method: 'POST',
+  //     headers: {
+  //       // 'Authorization': 'apikey ' + MAILCHIMP_KEY,
+  //       'Authorization': MAILCHIMP_KEY,
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: postData
+  // };
 
-  console.log("Options set for request")
-  console.log(options)
+  // console.log("Options set for request")
+  // console.log(options)
+
+  var options = {
+    method: 'POST',
+    url: 'https://us20.api.mailchimp.com/3.0/lists/1ffbf98866/members',
+    headers: {
+      Authorization: 'apikey ' + MAILCHIMP_KEY
+    },
+    body: postData
+  }
+  
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+    console.log(body);
+  });
 
   res.json({ status: true })
 
-  http.request(options, (err, response, body) => {
-      console.log("We made it!")
-      if (err) {
-        console.log("Could not connect to MailChimp")
-        // console.log(err)
-        // res.redirect('/error')
-      } else {
-        var bodyObj = JSON.parse(body);
-        console.log(bodyObj.status);
-        if (response.statusCode === 200) {
-          // res.redirect('/confirmation');
-          console.log("email retrieved")
-          console.log(body)
-          // res.json(response)
-        }
-      }
-  });
+  // http.request(options, (err, response, body) => {
+  //     console.log("We made it!")
+  //     if (err) {
+  //       console.log("Could not connect to MailChimp")
+  //       // console.log(err)
+  //       // res.redirect('/error')
+  //     } else {
+  //       var bodyObj = JSON.parse(body);
+  //       console.log(bodyObj.status);
+  //       if (response.statusCode === 200) {
+  //         // res.redirect('/confirmation');
+  //         console.log("email retrieved")
+  //         console.log(body)
+  //         // res.json(response)
+  //       }
+  //     }
+  // });
 
   // // MANDRILL
   // var mailOptions = {
