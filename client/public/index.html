@@ -13,6 +13,20 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <style>
+      /* Hide page by default */
+      html { display : none; }
+    </style>
+    
+    <script>
+      if (self == top) {
+        // Everything checks out, show the page.
+        document.documentElement.style.display = 'block';
+      } else {
+        // Break out of the frame.
+        top.location = self.location;
+      }
+    </script>
     <title>React App</title>
   </head>
   <body>

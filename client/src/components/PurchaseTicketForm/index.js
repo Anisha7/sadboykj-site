@@ -15,6 +15,7 @@ class PurchaseTicketForm extends Component {
         super(props)
         this.state={
             goHome: false,
+            goToError: false,
             goToConfirmation: false,
             firstName: '',
             lastName: '',
@@ -56,9 +57,14 @@ class PurchaseTicketForm extends Component {
         }).then((response) => response.json())
           .then((data) => {
               this.props.updateTicketSubmissionSuccess(data.status)
+              this.setState({ goToConfirmation : data.status });
+              if (!data.status) {
+                this.setState({ goToError : true });
+              }
             })
           .catch((err) => {
               this.props.updateTicketSubmissionSuccess(false)
+              this.setState({ goToError : true });
           })
         
     }
@@ -70,6 +76,10 @@ class PurchaseTicketForm extends Component {
 
         if (this.state.goToConfirmation) {
             return <Redirect to="/confirmation" />
+        }
+
+        if (this.state.goToError) {
+            return <Redirect to="/error" />
         }
 
         let error = null
@@ -115,7 +125,6 @@ class PurchaseTicketForm extends Component {
                             const valid = this.validateData()
                             if ( valid ) {
                                 this.sendData();
-                                this.setState({ goToConfirmation : true });
                             }
                         }}> RESERVE TICKET </button>
                         {error}
@@ -128,7 +137,6 @@ class PurchaseTicketForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
-  
     }
 }
   
