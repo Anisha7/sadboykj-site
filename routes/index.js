@@ -27,7 +27,6 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 
 router.post('/tickets', (req, res) => {
   const { firstName, lastName, email, age } = req.body;
-  res.send({ status: True })  
   // var worker = new Worker('mailchimp.js');
   const data = {
     members: [
@@ -62,11 +61,13 @@ router.post('/tickets', (req, res) => {
   console.log("Options set for request")
   console.log(options)
 
+  res.json({ status: true })
+
   http.request(options, (err, response, body) => {
       console.log("We made it!")
       if (err) {
         console.log("Could not connect to MailChimp")
-        console.log(err)
+        // console.log(err)
         // res.redirect('/error')
       } else {
         var bodyObj = JSON.parse(body);
