@@ -25,7 +25,7 @@ class TicketConfirmation extends Component {
         
         return (
         <HomeWrapper>
-            <FontAwesomeIcon onClick={()=>()=>this.setState({ goHome:true })} className="homeIcon" icon={faHome} size="2x" />
+            <FontAwesomeIcon onClick={()=>this.setState({ goHome:true })} className="homeIcon" icon={faHome} size="2x" />
             <FontAwesomeIcon icon={faCheckSquare} size="4x" />
             <h1>TICKET RESERVED!</h1>
             <div className="reservationDetails">
