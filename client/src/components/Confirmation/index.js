@@ -3,19 +3,29 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../commonStyles.css';
 import './styles.css';
-import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCheckSquare, faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HomeWrapper from '../HomeWrapper';
 
 class TicketConfirmation extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            goHome: false,
+        }
+    }
     render() {
         if ( !this.props.ticketSubmissionSuccess ) {
             return <Redirect to="/error" />
         }
+
+        if (this.state.goHome) {
+            return <Redirect to="/" />
+        }
         
         return (
         <HomeWrapper>
+            <FontAwesomeIcon onClick={()=>()=>this.setState({ goHome:true })} className="homeIcon" icon={faHome} size="2x" />
             <FontAwesomeIcon icon={faCheckSquare} size="4x" />
             <h1>TICKET RESERVED!</h1>
             <div className="reservationDetails">

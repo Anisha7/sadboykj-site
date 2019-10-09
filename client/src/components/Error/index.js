@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import './styles.css';
 import '../../commonStyles.css'
-import { faSadTear } from '@fortawesome/free-solid-svg-icons'
+import { faSadTear, faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import HomeWrapper from '../HomeWrapper'
 
@@ -12,6 +12,7 @@ class Error extends Component {
         super(props);
         this.state = {
             getTickets: false,
+            goHome: false,
         }
     }
 
@@ -24,8 +25,13 @@ class Error extends Component {
             return <Redirect to="/confirmation" />
         }
 
+        if (this.state.goHome) {
+            return <Redirect to="/" />
+        }
+
         return (
         <HomeWrapper>
+            <FontAwesomeIcon onClick={()=>this.setState({ goHome:true })} className="homeIcon" icon={faHome} size="2x" />
             <FontAwesomeIcon icon={faSadTear} size="4x" />
             <h1>OOPS!</h1>
             <p>Your request didn't go through!</p>

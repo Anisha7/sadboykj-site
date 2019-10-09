@@ -21,7 +21,8 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 router.post('/tickets', (req, res) => {
   // console.log(req.body)
   const { firstName, lastName, email, age } = req.body;
-
+  // find a worker
+  // celery or worker threads
   res.json({ status: true })
   return // remove this for below code to run
   // MAILCHIMP

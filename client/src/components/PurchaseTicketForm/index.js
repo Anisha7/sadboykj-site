@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateTicketSubmissionSuccess } from '../../actions';
 import HomeWrapper from '../HomeWrapper'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { validateFirstName, validateLastName, validateAge, validateEmail } from '../../helpers/InputValidation'
 import './styles.css'
@@ -79,7 +79,7 @@ class PurchaseTicketForm extends Component {
         
         return (
             <HomeWrapper>
-                <FontAwesomeIcon onClick={()=>this.goHome()} className="backIcon" icon={faArrowLeft} size="2x" />
+                <FontAwesomeIcon onClick={()=>this.goHome()} className="homeIcon" icon={faHome} size="2x" />
                 <div className="flex eventName">
                     <h1>SAD BOY SHOWOUT</h1>
                     <h2>HALLOWEEN</h2>
