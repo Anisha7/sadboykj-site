@@ -2,32 +2,24 @@ var express = require('express');
 var router = express.Router();
 var http = require('http');
 var request = require('request');
-// require('../helpers/mailchimp.js')
-// console.log("mailchimp.js found!")
 
 const MAILCHIMP_INT = process.env.MAILCHIMP_INT
 const MAILCHIMP_KEY = process.env.MAILCHIMP_KEY
 const MANDRILL_KEY = process.env.MANDRILL_KEY
 const LIST_ID = process.env.LIST_ID
+const FROM_EMAIL = process.env.FROM_EMAIL
 
 // Email Services
-const Mailchimp = require('mailchimp-api-v3');
-const mailchimp = MAILCHIMP_KEY ? new Mailchimp(MAILCHIMP_KEY) : {};
 const mandrill = require('mandrill-api/mandrill');
 const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 
-// var host = "smtp.mandrillapp.com"
-
 // Signup Route
 // TODO: 
-// 1. Get information from front end
-// 2. Save the information
-// 3. Send status worked or didn't work to front end
-// 4. Call a function (let it go off on its own)
+
 
 router.post('/tickets', (req, res) => {
+  // 1. Get information from front end
   const { firstName, lastName, email, age } = req.body;
-  // var worker = new Worker('mailchimp.js');
 
   const data = {
     email_address: email,
@@ -39,29 +31,12 @@ router.post('/tickets', (req, res) => {
     }
   };
 
-  console.log("Data put into Mailchimp format")
   const postData = JSON.stringify(data);
-  // // const url = MAILCHIMP_INT + '.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members'
 
-  // const options = {
-  //     host: 'https://' + MAILCHIMP_INT + '.api.mailchimp.com',
-  //     path: '/3.0/lists/' + LIST_ID + '/members', 
-  //     // "X-HTTP-Method-Override": PUT,
-  //     method: 'POST',
-  //     headers: {
-  //       // 'Authorization': 'apikey ' + MAILCHIMP_KEY,
-  //       'Authorization': MAILCHIMP_KEY,
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: postData
-  // };
-
-  // console.log("Options set for request")
-  // console.log(options)
-
+  // 2. Save the information to Mailchimp
   var options = {
     method: 'POST',
-    url: 'https://us20.api.mailchimp.com/3.0/lists/1ffbf98866/members',
+    url: 'https://' + MAILCHIMP_INT + '.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members',
     headers: {
       Authorization: 'apikey ' + MAILCHIMP_KEY
     },
@@ -73,50 +48,36 @@ router.post('/tickets', (req, res) => {
     console.log(body);
   });
 
+  // 3. Send status worked or didn't work to front end
   res.json({ status: true })
 
-  // http.request(options, (err, response, body) => {
-  //     console.log("We made it!")
-  //     if (err) {
-  //       console.log("Could not connect to MailChimp")
-  //       // console.log(err)
-  //       // res.redirect('/error')
-  //     } else {
-  //       var bodyObj = JSON.parse(body);
-  //       console.log(bodyObj.status);
-  //       if (response.statusCode === 200) {
-  //         // res.redirect('/confirmation');
-  //         console.log("email retrieved")
-  //         console.log(body)
-  //         // res.json(response)
-  //       }
-  //     }
-  // });
+  // 4. Send email confirmation
+  var template_name = "sadboy_halloween"
+  var template_content = [{
+      "FNAME": firstName,
+    }];
+  var message = {
+      "from_email": FROM_EMAIL,
+      "from_name": "SAD BOY KJ",
+      "to":[{"email": email, "name": firstName}],
+      "subject": "Sad Boy Halloween Confirmation",
+  };
 
-  // // MANDRILL
-  // var mailOptions = {
-  //   "template_name": "sadboy_halloween",
-  //   "template_content": [
-  //       {
-  //         "FNAME": firstName,
-  //       }
-  //   ],
-  //   "message": {
-  //     "from_email":"mgmt@sadboykj.com",
-  //     "from_name":"SAD BOY KJ",
-  //     "to":[{"email":email, "name":firstName, "type":"to"}],
-  //     "subject": "Sad Boy Halloween Confirmation",
-  //   }
-  // };
+  // Set time to send email
+  var d = new Date();
+  d = new Date(d.getTime() - 3000000);
+  var send_at = d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString())+":00";
+  var async = false;
+  var ip_pool = "Main Pool";
 
-  // function sendEmail() {
-  //   mandrill_client.messages.sendTemplate(mailOptions, function(res) {
-  //     console.log(res);
-  //   }, function(err) {
-  //     console.log('A mandrill error occurred: ' + err.name + ' - ' + err.message);
-  //   });
-  // }
-
+  // SEND THE EMAIL
+  mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content, "message": message, "async": async, "ip_pool": ip_pool, "send_at": send_at}, function(result) {
+    console.log(result);
+  }, function(e) {
+    // Mandrill returns the error as an object with name and message keys
+    console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+    // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+  });
 });
 
 module.exports = router;
