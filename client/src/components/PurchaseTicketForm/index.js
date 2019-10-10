@@ -3,9 +3,9 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateTicketSubmissionSuccess } from '../../actions';
 import HomeWrapper from '../HomeWrapper'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {validateFirstName, validateLastName, validateAge, validateEmail} from '../../helpers/InputValidation'
+import { validateFirstName, validateLastName, validateAge, validateEmail } from '../../helpers/InputValidation'
 import './styles.css'
 import '../../commonStyles.css'
 
@@ -15,6 +15,7 @@ class PurchaseTicketForm extends Component {
         super(props)
         this.state={
             goHome: false,
+            goToError: false,
             goToConfirmation: false,
             firstName: '',
             lastName: '',
@@ -54,9 +55,14 @@ class PurchaseTicketForm extends Component {
         }).then((response) => response.json())
           .then((data) => {
               this.props.updateTicketSubmissionSuccess(data.status)
+              this.setState({ goToConfirmation : data.status });
+              if (!data.status) {
+                this.setState({ goToError : true });
+              }
             })
           .catch((err) => {
               this.props.updateTicketSubmissionSuccess(false)
+              this.setState({ goToError : true });
           })
         
     }
@@ -70,14 +76,18 @@ class PurchaseTicketForm extends Component {
             return <Redirect to="/confirmation" />
         }
 
+        if (this.state.goToError) {
+            return <Redirect to="/error" />
+        }
+
         let error = null
         if (this.state.error) {
-            error = <p class="error">Please fix the highlighted input fields!</p>
+            error = <p className="error">Please fix the highlighted input fields!</p>
         }
         
         return (
             <HomeWrapper>
-                <FontAwesomeIcon onClick={()=>this.goHome()} className="backIcon" icon={faArrowLeft} size="2x" />
+                <FontAwesomeIcon onClick={()=>this.goHome()} className="homeIcon" icon={faHome} size="2x" />
                 <div className="flex eventName">
                     <h1>SAD BOY SHOWOUT</h1>
                     <h2>HALLOWEEN</h2>
@@ -106,14 +116,13 @@ class PurchaseTicketForm extends Component {
                             name="age" 
                             placeholder="Age" 
                             type="number" value={this.state.age} 
-                            onChange={(e) => this.setState({ age : e.target.value})}
+                            onChange={(e) => this.setState({ age : parseInt(e.target.value.toString(), 10)})}
                             required />
                     <div>
                         <button onClick={() => {
                             const valid = this.validateData()
                             if ( valid ) {
                                 this.sendData();
-                                this.setState({ goToConfirmation : true });
                             }
                         }}> RESERVE TICKET </button>
                         {error}
@@ -126,7 +135,6 @@ class PurchaseTicketForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
-  
     }
 }
   

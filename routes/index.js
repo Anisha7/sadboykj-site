@@ -20,7 +20,8 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 router.post('/tickets', (req, res) => {
   // 1. Get information from front end
   const { firstName, lastName, email, age } = req.body;
-
+  
+  // MAILCHIMP
   const data = {
     email_address: email,
     status: 'subscribed',
