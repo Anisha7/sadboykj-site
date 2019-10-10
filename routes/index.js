@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var http = require('http');
 var request = require('request');
+var validation = require('./inputValidation')
+var email_validator = require("email-validator");
 
 const MAILCHIMP_INT = process.env.MAILCHIMP_INT
 const MAILCHIMP_KEY = process.env.MAILCHIMP_KEY
@@ -20,7 +22,15 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 router.post('/tickets', (req, res) => {
   // 1. Get information from front end
   const { firstName, lastName, email, age } = req.body;
-  
+  if (!(validation.validateFirstName(firstName) && 
+      validation.validateLastName(lastName) &&  
+      validation.validateAge(age) &&
+      email_validator.validate(email))) {
+    console.log("FAILED :(")
+    res.json({ status: false })
+    return
+  }
+
   // MAILCHIMP
   const data = {
     email_address: email,

@@ -16,44 +16,43 @@ function isMaliciousString(val) {
     }
 
     return false
-}
+};
 
 // helpers for input data validation
-export function validateFirstName(val, ref) {
+function validateFirstName(val) {
     // check for malicious scripts
     if (isMaliciousString(val)) {
-        ref.className = 'invalidInput'
         return false
     }
-    
     // check that val is entered
     if (val.length === 0){
-        ref.className = 'invalidInput'
         return false
     }
-    ref.className = ''
     return true
-}
+};
 
-export function validateLastName(val, ref) {
+function validateLastName(val) {
     if (isMaliciousString(val)) {
-        ref.className = 'invalidInput'
         return false
     }
     
     if (val.length === 0){
-        ref.className = 'invalidInput'
         return false
     }
-    ref.className = ''
     return true
-}
+};
 
-export function validateAge(val, ref) {
+function validateAge(val) {
     if (val < 1 || val > 90) {
-        ref.className = 'invalidInput'
         return false
     }
-    ref.className = ''
     return true
-}
+};
+
+
+
+module.exports = {
+    validateFirstName,
+    validateLastName,
+    validateAge
+};

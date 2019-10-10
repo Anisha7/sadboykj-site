@@ -5,7 +5,7 @@ import { updateTicketSubmissionSuccess } from '../../actions';
 import HomeWrapper from '../HomeWrapper'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { validateFirstName, validateLastName, validateAge, validateEmail } from '../../helpers/InputValidation'
+import { validateFirstName, validateLastName, validateAge } from '../../helpers/InputValidation'
 import './styles.css'
 import '../../commonStyles.css'
 
@@ -33,8 +33,7 @@ class PurchaseTicketForm extends Component {
         const { firstName, lastName, email, age } = this.state
         const result = validateFirstName(firstName, this.refs.firstName) & 
                 validateLastName(lastName, this.refs.lastName) &
-                validateAge(age, this.refs.age) &
-                validateEmail(email, this.refs.email)
+                validateAge(age, this.refs.age)
         this.setState({ error : !result})
         return result
     }
@@ -120,11 +119,14 @@ class PurchaseTicketForm extends Component {
                             required />
                     <div>
                         <button onClick={() => {
-                            const valid = this.validateData()
-                            if ( valid ) {
-                                this.sendData();
+                            console.log("MADE IT HERE")
+                            let valid = this.validateData()
+                            if (valid) {
+                                this.sendData()
                             }
-                        }}> RESERVE TICKET </button>
+                        }}> 
+                            RESERVE TICKET 
+                        </button>
                         {error}
                     </div>
                 </div>

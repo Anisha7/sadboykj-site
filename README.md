@@ -10,6 +10,6 @@
     This should run the server and client at the same time!
 
 # Security
-- I created the forms using an input and a custom button that is not affiliated with the form. This prevents SQL injection since we are not accessing or using the URL data in any      way.
-- I am checking for malicious input upon the form submit before accepting the value, such that the form would not submit if the value is malicious using regular expressions. 
+- I created the forms using an input and a custom button that is not affiliated with the form. This prevents SQL injection since we are not accessing or using the URL data in any way.
+- I am checking for malicious input upon the form submit before accepting the value, such that the form would not submit if the value is malicious using regular expressions. (Secure from SQL injection and Cross-Site Scripting)
 - Prevented clickjacking by preventing our pages from being used in an iframe on any site other than itself by setting Content-Security-Policy.
