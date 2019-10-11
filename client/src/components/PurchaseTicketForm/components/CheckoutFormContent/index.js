@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
+import '../../styles.css'
+import '../../../../commonStyles.css'
 
-class CheckoutForm extends Component {
+class CheckoutFormContent extends Component {
   constructor(props) {
     super(props);
     this.state = { complete: false };
@@ -32,4 +34,4 @@ class CheckoutForm extends Component {
   }
 }
 
-export default injectStripe(CheckoutForm);
+export default injectStripe(CheckoutFormContent);

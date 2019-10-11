@@ -6,6 +6,7 @@ import HomeWrapper from '../HomeWrapper'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { validateFirstName, validateLastName, validateAge } from '../../helpers/InputValidation'
+import CheckoutForm from './components/CheckoutForm';
 import './styles.css'
 import '../../commonStyles.css'
 
@@ -128,6 +129,8 @@ class PurchaseTicketForm extends Component {
                             RESERVE TICKET 
                         </button>
                         {error}
+                        {/* Testing stripe UI */}
+                        <CheckoutForm />
                     </div>
                 </div>
             </HomeWrapper>
