@@ -16,9 +16,6 @@ const mandrill = require('mandrill-api/mandrill');
 const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 
 // Signup Route
-// TODO: 
-
-
 router.post('/tickets', (req, res) => {
   // 1. Get information from front end
   const { firstName, lastName, email, age } = req.body;

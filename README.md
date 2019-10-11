@@ -4,7 +4,8 @@
 <!-- TODO: test that api fetch works properly -->
 ## How to run the app:
     1. Clone the repository.
-    2. Open your terminal
+    2. Open your terminal 
+    3. `cd` to the repository location
     4. Run command: `npm start`
 
     This should run the server and client at the same time!
