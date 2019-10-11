@@ -14,6 +14,7 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "0.9.x",
+    "react-stripe-elements": "^5.0.1",
     "redux": "^4.0.4"
   },
   "scripts": {

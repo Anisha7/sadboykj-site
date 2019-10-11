@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { StripeProvider } from 'react-stripe-elements';
 
 import './App.css';
 
@@ -17,28 +18,31 @@ class App extends Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <div className="wrapper">
-          <Router>
-            <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/tickets">
-                  <PurchaseTicketForm />
-                </Route>
-                {/* Only goes here if form is submitted, 
-                else goes to error page */}
-                <Route path="/confirmation">
-                  <Confirmation />
-                </Route>
-                <Route path="/error">
-                  <Error />
-                </Route>
-              </Switch>
-          </Router>
-        </div>
-      </Provider>
+    // TODO: set up API key in .env to use here
+      <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
+        <Provider store={store}>
+          <div className="wrapper">
+            <Router>
+              <Switch>
+                  <Route exact path="/">
+                    <Home />
+                  </Route>
+                  <Route path="/tickets">
+                    <PurchaseTicketForm />
+                  </Route>
+                  {/* Only goes here if form is submitted, 
+                  else goes to error page */}
+                  <Route path="/confirmation">
+                    <Confirmation />
+                  </Route>
+                  <Route path="/error">
+                    <Error />
+                  </Route>
+                </Switch>
+            </Router>
+          </div>
+        </Provider>
+      </StripeProvider>
     )
   }
 }
