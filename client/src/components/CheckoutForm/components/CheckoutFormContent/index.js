@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
-import CheckoutFormWrapper from './components/CheckoutFormContent';
 
 class CheckoutForm extends Component {
   constructor(props) {
