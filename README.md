@@ -1,7 +1,6 @@
 # sadboykj-site
  
-<!-- TODO: write a script that runs the backend when front end is run! -->
-<!-- TODO: test that api fetch works properly -->
+<!-- TODO:  How to store data even if they didn't pay, yet still allowing multiple tries to pay without exiting the form progress?? -->
 ## How to run the app:
     1. Clone the repository.
     2. Open your terminal 

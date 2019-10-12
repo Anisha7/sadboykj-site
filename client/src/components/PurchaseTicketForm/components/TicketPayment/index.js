@@ -4,9 +4,6 @@ class TicketPayment extends Component {
     constructor(props) {
         super(props)
         this.state={
-            goHome: false,
-            goToError: false,
-            goToConfirmation: false,
             paymentSuccess: false,
         }
     }
@@ -14,7 +11,7 @@ class TicketPayment extends Component {
     render() {
         return (
             <HomeWrapper> 
-                <CheckoutForm />
+                <CheckoutForm succeeded={ (val) => this.setState( { paymentSuccess: val })}/>
             </HomeWrapper>
          )
     }

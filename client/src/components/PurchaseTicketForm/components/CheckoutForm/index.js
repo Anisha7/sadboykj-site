@@ -8,7 +8,7 @@ class CheckoutForm extends Component {
     return (
       <div className="example">
           <Elements>
-            <CheckoutFormContent />
+            <CheckoutFormContent  succeeded={ this.props.succeeded } />
           </Elements>
         </div>
     );

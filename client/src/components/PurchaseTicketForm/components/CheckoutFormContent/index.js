@@ -6,7 +6,7 @@ import '../../../../commonStyles.css'
 class CheckoutFormContent extends Component {
   constructor(props) {
     super(props);
-    this.state = { complete: false };
+    this.state = { error: false };
     this.submit = this.submit.bind(this);
   }
 
@@ -18,17 +18,26 @@ class CheckoutFormContent extends Component {
       body: token.id
     });
   
-    if (response.ok) console.log("Purchase Complete!")
+    if (response.ok) { 
+      this.props.succeeded(true);
+      console.log("Purchase Complete!");
+    } else {
+      this.setState({ error : true })
+    }
   }
 
   render() {
-    if (this.state.complete) return <h1>Purchase Complete</h1>;
+    let error = ''
+    if (this.state.error) {
+      error = 'Try Again!'
+    };
 
     return (
       <div className="checkout">
         <p>Would you like to complete the purchase?</p>
-        <CardElement />
+        <CardElement/>
         <button onClick={this.submit}>Purchase</button>
+        <p>{error}</p>
       </div>
     );
   }
