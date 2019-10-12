@@ -19,7 +19,7 @@ class App extends Component {
   render() {
     return (
     // TODO: set up API key in .env to use here
-      <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
+      <StripeProvider apiKey={ process.env.REACT_APP_STRIPE_PUBLISH }>
         <Provider store={store}>
           <div className="wrapper">
             <Router>
