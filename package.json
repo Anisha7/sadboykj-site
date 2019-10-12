@@ -8,18 +8,20 @@
   "proxy": "http://localhost:9000",
   "dependencies": {
     "acorn": "^7.1.0",
+    "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^8.1.0",
     "email-validator": "^2.0.4",
-    "express": "~4.16.1",
+    "express": "^4.16.4",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "mailchimp": "^1.2.1",
     "mailchimp-api-v3": "^1.13.1",
     "mandrill-api": "^1.0.45",
     "morgan": "~1.9.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "stripe": "^7.10.0"
   }
 }
