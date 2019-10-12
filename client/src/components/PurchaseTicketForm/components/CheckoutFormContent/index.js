@@ -6,12 +6,13 @@ import '../../../../commonStyles.css'
 class CheckoutFormContent extends Component {
   constructor(props) {
     super(props);
-    this.state = { error: false };
+    this.state = { error: false,
+    card: null };
     this.submit = this.submit.bind(this);
   }
 
   async submit(ev) {
-    let { token } = await this.props.stripe.createToken({ name: this.props.name });
+    let { token } = await this.props.stripe.createToken(this.state.card);
     let response = await fetch("http://localhost:9000/charge", {
       method: "POST",
       headers: {"Content-Type": "text/plain"},
@@ -34,9 +35,9 @@ class CheckoutFormContent extends Component {
 
     return (
       <div className="checkout">
-        <p>Would you like to complete the purchase?</p>
-        <CardElement/>
-        <button onClick={this.submit}>Purchase</button>
+        <p>Pay $5 to purchase an entry ticket!</p>
+        <CardElement onChange={(e) => this.setState({ card: e })} />
+        <button onClick={this.submit}>Purchase ticket</button>
         <p>{error}</p>
       </div>
     );
