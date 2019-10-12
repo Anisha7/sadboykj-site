@@ -10,7 +10,6 @@ import CheckoutForm from './components/CheckoutForm';
 import './styles.css'
 import '../../commonStyles.css'
 
-
 class PurchaseTicketForm extends Component {
     constructor(props) {
         super(props)
