@@ -4,6 +4,7 @@ var http = require('http');
 var request = require('request');
 var validation = require('./inputValidation')
 var email_validator = require("email-validator");
+const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
 const MAILCHIMP_INT = process.env.MAILCHIMP_INT
 const MAILCHIMP_KEY = process.env.MAILCHIMP_KEY
@@ -15,10 +16,27 @@ const FROM_EMAIL = process.env.FROM_EMAIL
 const mandrill = require('mandrill-api/mandrill');
 const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 
+// Charge Route 
+router.post("/charge", async (req, res) => {
+  try {
+    let {status} = await stripe.charges.create({
+      amount: 500,
+      currency: "usd",
+      description: "Sad Boy Showout Admission",
+      source: req.body
+    });
+    // Send status
+    res.json({status});
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
 // Signup Route
 router.post('/tickets', (req, res) => {
-  // 1. Get information from front end
-  const { firstName, lastName, email, age } = req.body;
+  // Get information from front end
+  const { firstName, lastName, email, age, paymentSuccess } = req.body;
   if (!(validation.validateFirstName(firstName) && 
       validation.validateLastName(lastName) &&  
       validation.validateAge(age) &&
@@ -28,6 +46,13 @@ router.post('/tickets', (req, res) => {
     return
   }
 
+  // If payment is a success
+  if (paymentSuccess) {
+    paid = "True";
+  } else {
+    paid = "False";
+  };
+
   // MAILCHIMP
   const data = {
     email_address: email,
@@ -35,7 +60,8 @@ router.post('/tickets', (req, res) => {
     merge_fields: {
       FNAME: firstName,
       LNAME: lastName,
-      AGE: age
+      AGE: age,
+      PAID: paid
     }
   };
 
