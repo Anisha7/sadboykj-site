@@ -1,18 +1,19 @@
 var express = require('express');
 var router = express.Router();
-var http = require('http');
 var request = require('request');
 var validation = require('./inputValidation')
 var email_validator = require("email-validator");
-const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+const stripe = require("stripe")(process.env);
 
 const MAILCHIMP_INT = process.env.MAILCHIMP_INT
 const MAILCHIMP_KEY = process.env.MAILCHIMP_KEY
 const MANDRILL_KEY = process.env.MANDRILL_KEY
 const LIST_ID = process.env.LIST_ID
 const FROM_EMAIL = process.env.FROM_EMAIL
+const STRIPE_SECRET = process.env.STRIPE_SECRET
 
 // Email Services
+const stripe = require("stripe")(STRIPE_SECRET);
 const mandrill = require('mandrill-api/mandrill');
 const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 
