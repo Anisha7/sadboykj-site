@@ -3,7 +3,6 @@ var router = express.Router();
 var request = require('request');
 var validation = require('./inputValidation')
 var email_validator = require("email-validator");
-const stripe = require("stripe")(process.env);
 
 const MAILCHIMP_INT = process.env.MAILCHIMP_INT
 const MAILCHIMP_KEY = process.env.MAILCHIMP_KEY
