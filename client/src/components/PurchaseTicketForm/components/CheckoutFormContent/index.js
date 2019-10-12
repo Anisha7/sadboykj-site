@@ -11,7 +11,7 @@ class CheckoutFormContent extends Component {
   }
 
   async submit(ev) {
-    let {token} = await this.props.stripe.createToken({name: "Name"});
+    let { token } = await this.props.stripe.createToken({ name: this.props.name });
     let response = await fetch("http://localhost:9000/charge", {
       method: "POST",
       headers: {"Content-Type": "text/plain"},

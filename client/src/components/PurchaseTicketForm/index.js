@@ -60,7 +60,7 @@ class PurchaseTicketForm extends Component {
             this.setState({ infoRetrieved: true })
             }} />
         if ( this.state.infoRetrieved ) {
-            form = <CheckoutForm updateState={(val) => this.setState({ userInfo : val })} />
+            form = <CheckoutForm updateState={(val) => this.setState({ userInfo : val })} name={ this.state.firstName + " " + this.state.lastName } />
         }
         
         return (
