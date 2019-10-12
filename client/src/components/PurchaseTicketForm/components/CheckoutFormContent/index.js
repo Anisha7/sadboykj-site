@@ -12,20 +12,20 @@ class CheckoutFormContent extends Component {
   }
 
   async submit(ev) {
-    console.log("here")
-    let { token } = await this.props.stripe.createToken(this.state.card);
-    let response = await fetch("http://localhost:9000/charge", {
+    let token = await this.props.stripe.createToken(this.state.card);
+    fetch("http://localhost:9000/charge", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: token
-    });
-    
-    if (response.ok) { 
-      this.props.succeeded(true);
-      console.log("Purchase Complete!");
-    } else {
-      this.setState({ error : true })
-    }
+      headers: {'Accept': 'application/json', "Content-Type": "application/json"},
+      body: JSON.stringify(token.token)
+    }).then((res) => {
+      console.log(res)
+      if (res.ok) {
+        this.props.succeeded(true)
+        console.log("Purchase Complete!")
+      } else {
+        this.setState({ error : true })
+      }
+    })
   }
 
   render() {

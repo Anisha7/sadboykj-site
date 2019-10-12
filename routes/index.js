@@ -20,7 +20,7 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 router.post("/charge", async (req, res) => {
   try {
     console.log("REQ BODY:")
-    console.log(req)
+    console.log(req.body)
     let {status} = await stripe.charges.create({
       amount: 500,
       currency: "usd",
