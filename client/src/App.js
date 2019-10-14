@@ -60,7 +60,7 @@ class App extends Component {
                   <Route exact path="/summerblack">
                     <SummerBlackHome />
                   </Route>
-                  <Route exact path="/lexi.reed">
+                  <Route exact path="/lexireed">
                     <LexiReedHome />
                   </Route>
 
