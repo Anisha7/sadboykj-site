@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import '../../../commonStyles.css'
 import '../styles.css';
-import cover from '../../../assets/levizadoff.png';
+import cover from '../../../assets/forghetto.png';
 import HomeWrapper from '../../HomeWrapper'
 
-class LevizadoffHome extends Component {
+class ForghettoHome extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -18,13 +18,13 @@ class LevizadoffHome extends Component {
             return <Redirect to='/tickets' />
         }
         return (
-        <HomeWrapper soundcloudLink="https://soundcloud.com/levizadoff" 
-                     itunesLink="NONE"
-                     instagramLink="https://instagram.com/levizadoff" 
-                     spotifyLink="https://open.spotify.com/artist/7hfMVlBE2lSPWXyMD9TUgA?si=oATmGgxnSRewxgLTr-hLag">
+        <HomeWrapper soundcloudLink="http://soundcloud.com/forghetto" 
+                     itunesLink="https://music.apple.com/us/artist/forghetto/1216951397"
+                     instagramLink="https://www.instagram.com/forghetto/" 
+                     spotifyLink="https://open.spotify.com/artist/0FSvkpAhgNFvb75II6Kfaw?nd=1">
             <img src={cover} className="cover" alt="cover" onClick={() => this.setState({ redirectToTicketForm : true })} />
         </HomeWrapper>)
     }
 }
 
-export default LevizadoffHome;
+export default ForghettoHome;

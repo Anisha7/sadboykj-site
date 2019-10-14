@@ -11,6 +11,7 @@ import ZonaccinoHome from './components/Home/Zonaccino';
 import XanubisHome from './components/Home/Xanubis';
 import LevizadoffHome from './components/Home/Levizadoff';
 import PsaIsmael from './components/Home/PsaIsmael';
+import ForghettoHome from './components/Home/Forghetto';
 
 import PurchaseTicketForm from './components/PurchaseTicketForm';
 import Confirmation from './components/Confirmation';
@@ -43,6 +44,10 @@ class App extends Component {
                   <Route exact path="/psa.ismael">
                     <PsaIsmael />
                   </Route>
+                  <Route exact path="/forghetto">
+                    <ForghettoHome />
+                  </Route>
+
                   <Route path="/tickets">
                     <PurchaseTicketForm />
                   </Route>
