@@ -24,7 +24,6 @@ class LevizadoffHome extends Component {
                      instagramLink="https://instagram.com/levizadoff" 
                      spotifyLink="https://open.spotify.com/artist/7hfMVlBE2lSPWXyMD9TUgA?si=oATmGgxnSRewxgLTr-hLag">
             <img src={cover} className="cover" alt="cover" onClick={() => this.setState({ redirectToTicketForm : true })} />
-            {/* <button onClick={() => this.setState({ redirectToTicketForm : true })} className="ticketButton">GET TICKETS</button> */}
         </HomeWrapper>)
     }
 }
