@@ -20,8 +20,6 @@ const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 router.post("/charge", async (req, res) => {
   try {
     const { id } = req.body;
-    console.log("REQ BODY:")
-    console.log(req.body)
     let {status} = await stripe.charges.create({
       amount: 500,
       currency: "usd",
@@ -41,6 +39,7 @@ router.post("/charge", async (req, res) => {
 router.post('/tickets', (req, res) => {
   // Get information from front end
   const { firstName, lastName, email, age, paymentSuccess } = req.body;
+
   if (!(validation.validateFirstName(firstName) && 
       validation.validateLastName(lastName) &&  
       validation.validateAge(age) &&

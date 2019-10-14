@@ -27,22 +27,35 @@ class PurchaseTicketForm extends Component {
     }
 
     sendData() {
+        console.log("SENDING DATA...")
         fetch("http://localhost:9000/tickets", {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(this.state.userInfo)
         }).then((response) => response.json())
           .then((data) => {
+              console.log("STATUS: ", data.status)
               this.props.updateTicketSubmissionSuccess(data.status)
               if (!data.status) {
                 this.setState({ error : true });
               }
             })
           .catch((err) => {
+              console.log(err)
               this.props.updateTicketSubmissionSuccess(false)
               this.setState({ error : true });
           })
         
+    }
+
+    checkoutSucceeded() {
+        this.setState({ userInfo: {
+            firstName: this.state.userInfo.firstName,
+            lastName: this.state.userInfo.lastName,
+            email: this.state.userInfo.email,
+            age: this.state.userInfo.age,
+            paymentSuccess: true
+        }})
     }
 
     render() {
@@ -51,7 +64,10 @@ class PurchaseTicketForm extends Component {
         }
 
         if (this.state.userInfo.paymentSuccess) {
+            console.log("I AM HERE!!!!!!!!!!!")
+            console.log(this.state.userInfo.paymentSuccess)
             this.sendData()
+            console.log("SENT DATA. REDIRECTING TO CONFIRMATION")
             return <Redirect to="/confirmation" />
         }
 
@@ -60,7 +76,9 @@ class PurchaseTicketForm extends Component {
             this.setState({ infoRetrieved: true })
             }} />
         if ( this.state.infoRetrieved ) {
-            form = <CheckoutForm updateState={(val) => this.setState({ userInfo : val })} name={ this.state.firstName + " " + this.state.lastName } />
+            form = <CheckoutForm updateState={(val) => this.setState({ userInfo : val })} 
+                                 name={ this.state.firstName + " " + this.state.lastName } 
+                                 succeeded={() => this.checkoutSucceeded()} />
         }
         
         return (

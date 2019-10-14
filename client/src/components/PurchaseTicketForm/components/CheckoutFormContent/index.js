@@ -19,9 +19,10 @@ class CheckoutFormContent extends Component {
       body: JSON.stringify(token.token)
     }).then((res) => {
       console.log(res)
-      if (res.ok) {
-        this.props.succeeded(true)
+      console.log(res.ok)
+      if (res.ok === true) {
         console.log("Purchase Complete!")
+        return this.props.succeeded()
       } else {
         this.setState({ error : true })
       }
