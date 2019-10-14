@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors"); // prevent cors errors
 const bodyParser = require('body-parser');
-
+const helmet = require('helmet')
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
@@ -13,11 +13,21 @@ var indexRouter = require('./routes/index');
 var app = express();
 
 // view engine setup
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(cors()); // use cors module
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(helmet())
+app.use(cors()); // use cors module
+app.use(cors({
+  // origin: [/http:\/\/localhost:\d+$/],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}))
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
