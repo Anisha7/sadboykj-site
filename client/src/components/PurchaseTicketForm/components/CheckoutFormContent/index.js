@@ -37,7 +37,7 @@ class CheckoutFormContent extends Component {
 
     return (
       <div className="checkout">
-        <p>Pay $5 to purchase an entry ticket!</p>
+        <p>$5</p>
         <CardElement onChange={(e) => this.setState({ card: e })} />
         <button onClick={this.submit}>Purchase ticket</button>
         <p>{error}</p>

@@ -7,6 +7,7 @@ import { StripeProvider } from 'react-stripe-elements';
 import './App.css';
 
 import Home from './components/Home';
+import ZonaccinoHome from './components/Home/Zonaccino';
 import PurchaseTicketForm from './components/PurchaseTicketForm';
 import Confirmation from './components/Confirmation';
 import Error from './components/Error';
@@ -26,6 +27,9 @@ class App extends Component {
               <Switch>
                   <Route exact path="/">
                     <Home />
+                  </Route>
+                  <Route exact path="/zonaccino">
+                    <ZonaccinoHome />
                   </Route>
                   <Route path="/tickets">
                     <PurchaseTicketForm />
