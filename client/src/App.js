@@ -13,6 +13,9 @@ import LevizadoffHome from './components/Home/Levizadoff';
 import PsaIsmael from './components/Home/PsaIsmael';
 import ForghettoHome from './components/Home/Forghetto';
 import JnyvHome from './components/Home/Jnyv';
+import JaimeCopeHome from './components/Home/JaimeCope';
+import SummerBlackHome from './components/Home/SummerBlack';
+import LexiReedHome from './components/Home/LexiReed';
 
 import PurchaseTicketForm from './components/PurchaseTicketForm';
 import Confirmation from './components/Confirmation';
@@ -50,6 +53,15 @@ class App extends Component {
                   </Route>
                   <Route exact path="/jny.v">
                     <JnyvHome />
+                  </Route>
+                  <Route exact path="/jaimecope">
+                    <JaimeCopeHome />
+                  </Route>
+                  <Route exact path="/summerblack">
+                    <SummerBlackHome />
+                  </Route>
+                  <Route exact path="/lexi.reed">
+                    <LexiReedHome />
                   </Route>
 
                   <Route path="/tickets">
