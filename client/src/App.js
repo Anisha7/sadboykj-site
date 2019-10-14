@@ -12,6 +12,7 @@ import XanubisHome from './components/Home/Xanubis';
 import LevizadoffHome from './components/Home/Levizadoff';
 import PsaIsmael from './components/Home/PsaIsmael';
 import ForghettoHome from './components/Home/Forghetto';
+import JnyvHome from './components/Home/Jnyv';
 
 import PurchaseTicketForm from './components/PurchaseTicketForm';
 import Confirmation from './components/Confirmation';
@@ -46,6 +47,9 @@ class App extends Component {
                   </Route>
                   <Route exact path="/forghetto">
                     <ForghettoHome />
+                  </Route>
+                  <Route exact path="/jny.v">
+                    <JnyvHome />
                   </Route>
 
                   <Route path="/tickets">
