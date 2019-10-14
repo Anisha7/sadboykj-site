@@ -8,6 +8,9 @@ import './App.css';
 
 import Home from './components/Home';
 import ZonaccinoHome from './components/Home/Zonaccino';
+import XanubisHome from './components/Home/Xanubis';
+import LevizadoffHome from './components/Home/Levizadoff';
+
 import PurchaseTicketForm from './components/PurchaseTicketForm';
 import Confirmation from './components/Confirmation';
 import Error from './components/Error';
@@ -30,6 +33,12 @@ class App extends Component {
                   </Route>
                   <Route exact path="/zonaccino">
                     <ZonaccinoHome />
+                  </Route>
+                  <Route exact path="/xanubis">
+                    <XanubisHome />
+                  </Route>
+                  <Route exact path="/levizadoff">
+                    <LevizadoffHome />
                   </Route>
                   <Route path="/tickets">
                     <PurchaseTicketForm />
