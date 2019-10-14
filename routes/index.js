@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var http = require('http');
 var request = require('request');
 var validation = require('./inputValidation')
 var email_validator = require("email-validator");
@@ -10,18 +9,37 @@ const MAILCHIMP_KEY = process.env.MAILCHIMP_KEY
 const MANDRILL_KEY = process.env.MANDRILL_KEY
 const LIST_ID = process.env.LIST_ID
 const FROM_EMAIL = process.env.FROM_EMAIL
+const STRIPE_SECRET = process.env.STRIPE_SECRET
 
 // Email Services
+const stripe = require("stripe")(STRIPE_SECRET);
 const mandrill = require('mandrill-api/mandrill');
 const mandrill_client = new mandrill.Mandrill(MANDRILL_KEY);
 
+// Charge Route 
+router.post("/charge", async (req, res) => {
+  try {
+    const { id } = req.body;
+    let {status} = await stripe.charges.create({
+      amount: 500,
+      currency: "usd",
+      description: "Sad Boy Showout Admission",
+      source: id
+    });
+    // Send status
+    res.json({status});
+  } catch (err) {
+    console.log("ERROR")
+    console.log(err);
+    res.status(500).end();
+  }
+});
+
 // Signup Route
-// TODO: 
-
-
 router.post('/tickets', (req, res) => {
-  // 1. Get information from front end
-  const { firstName, lastName, email, age } = req.body;
+  // Get information from front end
+  const { firstName, lastName, email, age, paymentSuccess } = req.body;
+
   if (!(validation.validateFirstName(firstName) && 
       validation.validateLastName(lastName) &&  
       validation.validateAge(age) &&
@@ -31,6 +49,13 @@ router.post('/tickets', (req, res) => {
     return
   }
 
+  // If payment is a success
+  if (paymentSuccess) {
+    paid = "True";
+  } else {
+    paid = "False";
+  };
+
   // MAILCHIMP
   const data = {
     email_address: email,
@@ -38,7 +63,8 @@ router.post('/tickets', (req, res) => {
     merge_fields: {
       FNAME: firstName,
       LNAME: lastName,
-      AGE: age
+      AGE: age,
+      PAID: paid
     }
   };
 

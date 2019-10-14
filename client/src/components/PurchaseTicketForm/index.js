@@ -5,65 +5,57 @@ import { updateTicketSubmissionSuccess } from '../../actions';
 import HomeWrapper from '../HomeWrapper'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { validateFirstName, validateLastName, validateAge } from '../../helpers/InputValidation'
+import CheckoutForm from './components/CheckoutForm';
 import './styles.css'
 import '../../commonStyles.css'
-
+import UserInfoForm from './components/UserInfoForm';
 
 class PurchaseTicketForm extends Component {
     constructor(props) {
         super(props)
         this.state={
             goHome: false,
-            goToError: false,
-            goToConfirmation: false,
-            firstName: '',
-            lastName: '',
-            email: '',
-            age: 0,
             error: false,
+            userInfo: { firstName: '',
+                         lastName: '',
+                         email: '',
+                         age: 0,
+                         paymentSuccess: false 
+                        },
+            infoRetrieved: false,
         }
     }
 
-    goHome() {
-        this.setState({ goHome: true })
-    }
-
-    validateData() {
-        const { firstName, lastName, email, age } = this.state
-        const result = validateFirstName(firstName, this.refs.firstName) & 
-                validateLastName(lastName, this.refs.lastName) &
-                validateAge(age, this.refs.age)
-        this.setState({ error : !result})
-        return result
-    }
-
-    // TODO: Test this function
     sendData() {
-        const opts = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            age: this.state.age
-        }
-        console.log(opts)
+        console.log("SENDING DATA...")
         fetch("http://localhost:9000/tickets", {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(opts)
+            body: JSON.stringify(this.state.userInfo)
         }).then((response) => response.json())
           .then((data) => {
+              console.log("STATUS: ", data.status)
               this.props.updateTicketSubmissionSuccess(data.status)
-              this.setState({ goToConfirmation : data.status });
               if (!data.status) {
-                this.setState({ goToError : true });
+                this.setState({ error : true });
               }
             })
           .catch((err) => {
+              console.log(err)
               this.props.updateTicketSubmissionSuccess(false)
-              this.setState({ goToError : true });
+              this.setState({ error : true });
           })
         
+    }
+
+    checkoutSucceeded() {
+        this.setState({ userInfo: {
+            firstName: this.state.userInfo.firstName,
+            lastName: this.state.userInfo.lastName,
+            email: this.state.userInfo.email,
+            age: this.state.userInfo.age,
+            paymentSuccess: true
+        }})
     }
 
     render() {
@@ -71,65 +63,28 @@ class PurchaseTicketForm extends Component {
             return <Redirect to="/" />
         }
 
-        if (this.state.goToConfirmation) {
+        if (this.state.userInfo.paymentSuccess) {
+            console.log("I AM HERE!!!!!!!!!!!")
+            console.log(this.state.userInfo.paymentSuccess)
+            this.sendData()
+            console.log("SENT DATA. REDIRECTING TO CONFIRMATION")
             return <Redirect to="/confirmation" />
         }
 
-        if (this.state.goToError) {
-            return <Redirect to="/error" />
-        }
-
-        let error = null
-        if (this.state.error) {
-            error = <p className="error">Please fix the highlighted input fields!</p>
+        let form = <UserInfoForm updateState={(val) => {
+            this.setState({ userInfo : val });
+            this.setState({ infoRetrieved: true })
+            }} />
+        if ( this.state.infoRetrieved ) {
+            form = <CheckoutForm updateState={(val) => this.setState({ userInfo : val })} 
+                                 name={ this.state.firstName + " " + this.state.lastName } 
+                                 succeeded={() => this.checkoutSucceeded()} />
         }
         
         return (
             <HomeWrapper>
-                <FontAwesomeIcon onClick={()=>this.goHome()} className="homeIcon" icon={faHome} size="2x" />
-                <div className="flex eventName">
-                    <h1>SAD BOY SHOWOUT</h1>
-                    <h2>HALLOWEEN</h2>
-                </div>
-                <div className="flex">
-                    <input  ref="firstName"
-                            name="firstName" 
-                            placeholder="First name" 
-                            value={this.state.firstName} 
-                            onChange={(e) => this.setState({ firstName : e.target.value})}
-                            required />
-                    <input  ref="lastName"
-                            name="lastName" 
-                            placeholder="Last name" 
-                            value={this.state.lastName} 
-                            onChange={(e) => this.setState({ lastName : e.target.value})} 
-                            required />
-                    <input  ref="email"
-                            name="email" 
-                            placeholder="Email" 
-                            type="email" 
-                            value={this.state.email} 
-                            onChange={(e) => this.setState({ email : e.target.value})}
-                            required />
-                    <input  ref="age"
-                            name="age" 
-                            placeholder="Age" 
-                            type="number" value={this.state.age} 
-                            onChange={(e) => this.setState({ age : parseInt(e.target.value.toString(), 10)})}
-                            required />
-                    <div>
-                        <button onClick={() => {
-                            console.log("MADE IT HERE")
-                            let valid = this.validateData()
-                            if (valid) {
-                                this.sendData()
-                            }
-                        }}> 
-                            RESERVE TICKET 
-                        </button>
-                        {error}
-                    </div>
-                </div>
+                <FontAwesomeIcon onClick={() => {this.setState({ goHome: true })}} className="homeIcon" icon={faHome} size="2x" />
+                { form }
             </HomeWrapper>
         )
     }

@@ -2,11 +2,6 @@ function isMaliciousString(val) {
     if (typeof val !== "string") {
         return true
     }
-    
-    let regex = /^[A-Za-z0-9\-\_]+/
-    if (!val.match(regex)) {
-        return true
-    }
 
     let validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-@."
     for (let i = 0; i < val.length; i++) {
@@ -20,12 +15,15 @@ function isMaliciousString(val) {
 
 // helpers for input data validation
 function validateFirstName(val) {
+    console.log(val)
     // check for malicious scripts
     if (isMaliciousString(val)) {
+        console.log("MALICIOUS")
         return false
     }
     // check that val is entered
     if (val.length === 0){
+        console.log("LENGTH")
         return false
     }
     return true

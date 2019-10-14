@@ -3,8 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' ">
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' "> -->
+    
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+
+    <script>
+      // disable react-dev-tools for this project
+      // https://github.com/facebook/react-devtools/issues/191
+      // TODO: Test this works in production
+      if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object") {
+        for (let [key, value] of Object.entries(window.__REACT_DEVTOOLS_GLOBAL_HOOK__)) {
+          window.__REACT_DEVTOOLS_GLOBAL_HOOK__[key] = typeof value == "function" ? ()=>{} : null;
+        }
+      }
+    </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tag above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -28,5 +40,7 @@
       To begin the development, run `npm start`.
       To create a production bundle, use `npm run build`.
     -->
+
+    <script src="https://js.stripe.com/v3/"></script>
   </body>
 </html>
