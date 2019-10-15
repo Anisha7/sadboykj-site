@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "(node ./bin/www) & (cd client && npm run start)",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "devstart": "(node ./bin/www) & (cd client && npm run start)",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
+    "start": "node ./bin/www"
   },
   "proxy": "http://localhost:9000",
   "dependencies": {
