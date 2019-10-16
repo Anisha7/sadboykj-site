@@ -28,7 +28,7 @@ class PurchaseTicketForm extends Component {
 
     sendData() {
         console.log("SENDING DATA...")
-        fetch("http://localhost:9000/tickets", {
+        fetch("/tickets", {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(this.state.userInfo)

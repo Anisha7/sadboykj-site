@@ -13,7 +13,7 @@ class CheckoutFormContent extends Component {
 
   async submit(ev) {
     let token = await this.props.stripe.createToken(this.state.card);
-    fetch("http://localhost:9000/charge", {
+    fetch("/charge", {
       method: "POST",
       headers: {'Accept': 'application/json', "Content-Type": "application/json"},
       body: JSON.stringify(token.token)
