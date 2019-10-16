@@ -69,7 +69,7 @@ class UserInfoForm extends Component {
                     <input  ref="age"
                             name="age" 
                             placeholder="Age" 
-                            type="number" value={this.state.age} 
+                            type="number"
                             onChange={(e) => this.setState({ age : parseInt(e.target.value.toString(), 10)})}
                             required />
                     <div>
