@@ -19,7 +19,7 @@ class XanubisHome extends Component {
             return <Redirect to='/tickets' />
         }
         return (
-        <HomeWrapper soundcloudLink="https://soundcloud.com/510zona" 
+        <HomeWrapper soundcloudLink="https://soundcloud.com/xan-ubis" 
                      itunesLink="https://music.apple.com/us/artist/xanubis/1345373634" 
                      instagramLink="https://www.instagram.com/xanubis/" 
                      spotifyLink="https://open.spotify.com/artist/74n1PorsDN4phxsKNzcYxh?si=ZFzpkRvUT1C4jgwjIKgIvw">
