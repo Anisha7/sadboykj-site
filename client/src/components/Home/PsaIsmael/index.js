@@ -19,10 +19,10 @@ class PsaIsmaelHome extends Component {
             return <Redirect to='/tickets' />
         }
         return (
-        <HomeWrapper soundcloudLink="https://soundcloud.com/levizadoff" 
+        <HomeWrapper soundcloudLink="https://soundcloud.com/lil_ish14/glory-days" 
                      itunesLink="NONE"
                      instagramLink="https://www.instagram.com/psa.ismael/" 
-                     spotifyLink="https://open.spotify.com/artist/7hfMVlBE2lSPWXyMD9TUgA?si=oATmGgxnSRewxgLTr-hLag">
+                     spotifyLink="NONE">
             <img src={cover} className="cover" alt="cover" onClick={() => this.setState({ redirectToTicketForm : true })} />
         </HomeWrapper>)
     }
