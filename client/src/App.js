@@ -16,6 +16,7 @@ import JnyvHome from './components/Home/Jnyv';
 import JaimeCopeHome from './components/Home/JaimeCope';
 import SummerBlackHome from './components/Home/SummerBlack';
 import LexiReedHome from './components/Home/LexiReed';
+import RapidHome from './components/Home/Rapid';
 
 import PurchaseTicketForm from './components/PurchaseTicketForm';
 import Confirmation from './components/Confirmation';
@@ -62,6 +63,9 @@ class App extends Component {
                   </Route>
                   <Route exact path="/lexireed">
                     <LexiReedHome />
+                  </Route>
+                  <Route exact path="/rapid">
+                    <RapidHome />
                   </Route>
 
                   <Route path="/tickets">

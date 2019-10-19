@@ -39,7 +39,7 @@ class TicketConfirmation extends Component {
                 <p>Location: </p>
                 <p>Jack London Aquatic Center</p>
                 <p>Details:</p> 
-                <p>Pay at the door</p>
+                <p>Doors open at 6pm</p>
             </div>
         </HomeWrapper>)
     }
