@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import '../../../commonStyles.css'
 import '../styles.css';
-import cover from '../../../assets/rapid.png';
+import cover from '../../../assets/princesslexis.png';
 import HomeWrapper from '../../HomeWrapper'
 
-class RapidHome extends Component {
+class PrincessLexisHome extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -18,13 +18,13 @@ class RapidHome extends Component {
             return <Redirect to='/tickets' />
         }
         return (
-        <HomeWrapper soundcloudLink="NONE" 
-                     itunesLink="NONE"
-                     instagramLink="NONE" 
-                     spotifyLink="NONE">
+        <HomeWrapper soundcloudLink="https://soundcloud.com/princess_lexis" 
+                     itunesLink="https://music.apple.com/us/album/does-it-ever-cross-ur-mind-feat-xanibus-vazh/1459864430?i=1459864649"
+                     instagramLink="https://www.instagram.com/princesslexis._/" 
+                     spotifyLink="https://open.spotify.com/track/41KmP3xZVpC7xDiyFKPbe0?si=WCniMYdYT1azTptHvCC4OQ">
             <img src={cover} className="cover" alt="cover" onClick={() => this.setState({ redirectToTicketForm : true })} />
         </HomeWrapper>)
     }
 }
 
-export default RapidHome;
+export default PrincessLexisHome;
