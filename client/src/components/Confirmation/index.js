@@ -37,7 +37,7 @@ class TicketConfirmation extends Component {
                 <p>Date:</p> 
                 <p>Nov 1, 2019</p>
                 <p>Location: </p>
-                <p>Jack London Aquatic Center</p>
+                <p>Blue Dream, 1300 7th st., Oakland</p>
                 <p>Details:</p> 
                 <p>Doors open at 6pm</p>
             </div>
