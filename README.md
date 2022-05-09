@@ -1,5 +1,13 @@
 # sadboykj-site
-https://sadboykj.com
+Concert Registration Site
+
+https://www.sadboykj.com
+
+APIs
+Stripe
+Mailchimp
+Mandrill
+Heroku
  
 <!-- TODO:  How to store data even if they didn't pay, yet still allowing multiple tries to pay without exiting the form progress?? -->
 ## How to run the app:
